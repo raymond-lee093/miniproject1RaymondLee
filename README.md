@@ -15,7 +15,7 @@ graphs that output as PNG files.
 ## Getting Started
 
 ### Installing
-In the github repository for this program, click code and copy HTTPS web URL link.
+In the GitHub repository for this program, click code and copy HTTPS web URL link.
 Once PyCharm is opened, click get from VCS tab and paste the URL. Then click clone
 to clone the repository. Make sure you create a local virtual environment by adding
 a new interpreter. Base interpreter can run on Python 3.12.
@@ -44,5 +44,7 @@ before you pip install the requirements.txt. Complete that before you run the ma
 ## Authors
 
 Raymond Lee
+
+
 
 
