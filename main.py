@@ -36,52 +36,46 @@ def getClosingPrice(ticker):
     return closingPrice_list
 
 
-def printGraph(stocks):
-    # Function prints graphs of stocks
+def printGraph(stock):
+    # Function prints graph of stock
 
-    # Create charts directory to store png files of plot graphs
-    try:
-        Path("charts").mkdir()
-    except FileExistsError:
-        pass
+    # Create numpy array of a stock
+    stockClosing_prices = np.array(getClosingPrice(stock))
 
-    for stock in stocks:
-        # Create numpy array of a stock
-        stockClosing_prices = np.array(getClosingPrice(stock))
+    # Create appropriate x-axis values for graph
+    days = list(range(1, len(stockClosing_prices)+1))
 
-        # Create appropriate x-axis values for graph
-        days = list(range(1, len(stockClosing_prices)+1))
+    # Plots the graph
+    plt.plot(days, stockClosing_prices)
 
-        # Plots the graph
-        plt.plot(days, stockClosing_prices)
+    # Produce y-axis max and min
+    prices = getClosingPrice(stock)
+    prices.sort()
+    lowPrice = prices[0]
+    highPrice = prices[-1]
 
-        # Produce y-axis max and min
-        prices = getClosingPrice(stock)
-        prices.sort()
-        lowPrice = prices[0]
-        highPrice = prices[-1]
+    # Set x-axis and y-axis min and max
+    plt.axis((1, 10, lowPrice-2, highPrice+2))
 
-        # Set x-axis and y-axis min and max
-        plt.axis((1, 10, lowPrice-2, highPrice+2))
+    # Set graph labels
+    plt.xlabel("Days")
+    plt.ylabel("Closing Price")
+    plt.title("Closing Price for " + stock)
 
-        # Set graph labels
-        plt.xlabel("Days")
-        plt.ylabel("Closing Price")
-        plt.title("Closing Price for " + stock)
+    # Saving the graphs
+    savefile = "charts/" + stock + ".png"
+    plt.savefig(savefile)
 
-        # Saving the graphs
-        savefile = "charts/" + stock + ".png"
-        plt.savefig(savefile)
-
-        # Show graph
-        plt.show()
+    # Show graph
+    plt.show()
 
 
 def getStocks():
     # Function gets user input for 5 valid stocks
+    # puts them in a list
 
-    # List of stocks to get from user, was declared outside of function
-    global stocks
+    # List of stocks to get from user
+    stocks = []
 
     print("Enter 5 stocks to graph:")
 
@@ -91,12 +85,14 @@ def getStocks():
             print("Enter stock ticker " + str(i))
             ticker = input(">>> ")
             try:
+                print("Checking ticker...")
                 stock = yf.Ticker(ticker)
                 # If this statement creates an error ticker is not valid
                 # Flow control will go to except block
                 stock.info
                 # Append valid ticker to stocks list
                 stocks.append(ticker)
+                print("Valid ticker")
                 break
             except:
                 print("Invalid stock. Please enter another stock ticker")
@@ -104,5 +100,5 @@ def getStocks():
     return stocks
 
 
-stocks = []
+
 
