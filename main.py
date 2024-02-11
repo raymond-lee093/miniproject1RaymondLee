@@ -37,7 +37,7 @@ def getClosingPrice(ticker):
 
 
 def printGraph(stock):
-    # Function prints graph of stock
+    # Function prints graph of stock prices
 
     # Create numpy array of a stock
     stockClosing_prices = np.array(getClosingPrice(stock))
