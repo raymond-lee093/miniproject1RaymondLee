@@ -5,7 +5,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
-import requests
 from pathlib import Path
 
 
@@ -64,7 +63,7 @@ def printGraph(stock):
     plt.title("Closing Price for " + stock)
 
     # Saving the graphs
-    savefile = "charts/" + stock + ".png"
+    savefile = "charts/" + stock.upper() + ".png"
     plt.savefig(savefile)
 
     # Show graph
@@ -85,6 +84,7 @@ def getStocks():
         while True:
             print("Enter stock ticker " + str(i))
             ticker = input(">>> ")
+            ticker = ticker.upper()
             try:
                 print("Checking ticker...")
                 stock = yf.Ticker(ticker)
@@ -112,5 +112,7 @@ try:
 except FileExistsError:
     pass
 
-
+for stock in getStocks():
+    getClosingPrice(stock)
+    printGraph(stock)
 
