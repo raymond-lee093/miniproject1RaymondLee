@@ -19,7 +19,7 @@ from pathlib import Path
 # (20/20 points) There should be a README.md file in your project that explains what your project is, how to install the pip requirements, and how to execute the program. Please use the GitHub flavor of Markdown.
 
 def getClosingPrice(ticker):
-    # Gets closing prices of last 10 trading days of a stock
+    # Function gets closing prices of last 10 trading days of a stock
 
     stockTicker = yf.Ticker(ticker)
     # Get historical market data of last 10 trading days
@@ -34,44 +34,45 @@ def getClosingPrice(ticker):
         closingPrice_list.append(round(price, 2))
 
     return closingPrice_list
-try:
+
+
+def printGraph(stocks):
+
     # Create charts directory to store png files of plot graphs
-    Path("charts").mkdir()
-except FileExistsError:
-    pass
+    try:
+        Path("charts").mkdir()
+    except FileExistsError:
+        pass
 
-# Apple, Microsoft, Amazon, Google, Bank of America
-stocks = ["AAPL", "MSFT", "AMZN", "GOOG", "BAC"]
+    for stock in stocks:
+        # Create numpy array of a stock
+        stockClosing_prices = np.array(getClosingPrice(stock))
 
-for stock in stocks:
-    # Create numpy array of a stock
-    stockClosing_prices = np.array(getClosingPrice(stock))
+        # Create appropriate x-axis values for graph
+        days = list(range(1, len(stockClosing_prices)+1))
 
-    # Create appropriate x-axis values for graph
-    days = list(range(1, len(stockClosing_prices)+1))
+        # Plots the graph
+        plt.plot(days, stockClosing_prices)
 
-    # Plots the graph
-    plt.plot(days, stockClosing_prices)
+        # Produce y-axis max and min
+        prices = getClosingPrice(stock)
+        prices.sort()
+        lowPrice = prices[0]
+        highPrice = prices[-1]
 
-    # Produce y-axis max and min
-    prices = getClosingPrice(stock)
-    prices.sort()
-    lowPrice = prices[0]
-    highPrice = prices[-1]
+        # Set x-axis and y-axis min and max
+        plt.axis((1, 10, lowPrice-2, highPrice+2))
 
-    # Set x-axis and y-axis min and max
-    plt.axis((1, 10, lowPrice-2, highPrice+2))
+        # Set graph labels
+        plt.xlabel("Days")
+        plt.ylabel("Closing Price")
+        plt.title("Closing Price for " + stock)
 
-    # Set graph labels
-    plt.xlabel("Days")
-    plt.ylabel("Closing Price")
-    plt.title("Closing Price for " + stock)
+        # Saving the graphs
+        savefile = "charts/" + stock + ".png"
+        plt.savefig(savefile)
 
-    # Saving the graphs
-    savefile = "charts/" + stock + ".png"
-    plt.savefig(savefile)
-
-    # Show graph
-    plt.show()
+        # Show graph
+        plt.show()
 
 
