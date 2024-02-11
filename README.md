@@ -17,7 +17,7 @@ graphs that output as PNG files.
 ### Installing
 In the github repository for this program, click code and copy HTTPS web URL link.
 Once PyCharm is opened, click get from VCS tab and paste the URL. Then click clone
-to clone the repository. Make sure you create a virtual environment.
+to clone the repository. Make sure you create a local virtual environment.
 
 
 ### Pip install instructions
@@ -37,7 +37,7 @@ python main.py
 
 ## Help
 
-It is best to be in a virtual environment in PyCharm after you clone repository and
+It is best to be in a local virtual environment in PyCharm after you clone repository and
 before you pip install the requirements.txt. Complete that before you run the main.py file.
 
 ## Authors
