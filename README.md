@@ -17,7 +17,8 @@ graphs that output as PNG files.
 ### Installing
 In the github repository for this program, click code and copy HTTPS web URL link.
 Once PyCharm is opened, click get from VCS tab and paste the URL. Then click clone
-to clone the repository. Make sure you create a local virtual environment.
+to clone the repository. Make sure you create a local virtual environment by adding
+a new interpreter. Base interpreter can run on Python 3.12.
 
 
 ### Pip install instructions
