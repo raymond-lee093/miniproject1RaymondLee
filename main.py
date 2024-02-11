@@ -5,6 +5,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
+import requests
 from pathlib import Path
 
 
@@ -87,15 +88,18 @@ def getStocks():
             try:
                 print("Checking ticker...")
                 stock = yf.Ticker(ticker)
-                # If this statement creates an error ticker is not valid
-                # Flow control will go to except block
-                stock.info
+                info = stock.info
+                # If info is assigned a dict of {'trailingPegRatio': None}
+                if info.get("trailingPegRatio") is None:
+                    print("Invalid stock. Please enter another stock ticker.")
+                    # Ask for a valid stock ticker
+                    continue
                 # Append valid ticker to stocks list
                 stocks.append(ticker)
-                print("Valid ticker")
+                print("Valid ticker.")
                 break
             except:
-                print("Invalid stock. Please enter another stock ticker")
+                print("Invalid stock. Please enter another stock ticker.")
 
     return stocks
 
