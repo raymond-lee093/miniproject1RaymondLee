@@ -5,6 +5,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import yfinance as yf
+from pathlib import Path
 
 
 # (5/5 points) Initial comments with your name, class and project at the top of your .py file.
@@ -33,6 +34,11 @@ def getClosingPrice(ticker):
         closingPrice_list.append(round(price, 2))
 
     return closingPrice_list
+try:
+    # Create charts directory to store png files of plot graphs
+    Path("charts").mkdir()
+except FileExistsError:
+    pass
 
 # Apple, Microsoft, Amazon, Google, Bank of America
 stocks = ["AAPL", "MSFT", "AMZN", "GOOG", "BAC"]
