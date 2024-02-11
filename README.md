@@ -38,7 +38,7 @@ python main.py
 ## Help
 
 It is best to be in a virtual environment in PyCharm after you clone repository and
-before you install the requirements.txt. Complete that before you run the main.py file.
+before you pip install the requirements.txt. Complete that before you run the main.py file.
 
 ## Authors
 
