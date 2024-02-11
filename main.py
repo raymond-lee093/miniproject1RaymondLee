@@ -37,6 +37,7 @@ def getClosingPrice(ticker):
 
 
 def printGraph(stocks):
+    # Function prints graphs of stocks
 
     # Create charts directory to store png files of plot graphs
     try:
@@ -75,4 +76,33 @@ def printGraph(stocks):
         # Show graph
         plt.show()
 
+
+def getStocks():
+    # Function gets user input for 5 valid stocks
+
+    # List of stocks to get from user, was declared outside of function
+    global stocks
+
+    print("Enter 5 stocks to graph:")
+
+    for i in range(1, 6):
+        # Loop will test for a valid stock
+        while True:
+            print("Enter stock ticker " + str(i))
+            ticker = input(">>> ")
+            try:
+                stock = yf.Ticker(ticker)
+                # If this statement creates an error ticker is not valid
+                # Flow control will go to except block
+                stock.info
+                # Append valid ticker to stocks list
+                stocks.append(ticker)
+                break
+            except:
+                print("Invalid stock. Please enter another stock ticker")
+
+    return stocks
+
+
+stocks = []
 
