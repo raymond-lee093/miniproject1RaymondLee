@@ -105,7 +105,6 @@ def getStocks():
 
 
 # Begin program
-
 # Create charts directory to store png files of plot graphs
 try:
     Path("charts").mkdir()
