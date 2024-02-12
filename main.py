@@ -37,7 +37,7 @@ def getClosingPrice(ticker):
 
 
 def printGraph(stock):
-    # Function prints graph of stock prices
+    # Function prints graph of stock closing prices of a stock
 
     # Create numpy array of a stock
     stockClosing_prices = np.array(getClosingPrice(stock))
@@ -70,48 +70,16 @@ def printGraph(stock):
     plt.show()
 
 
-def getStocks():
-    # Function gets user input for 5 valid stocks
-    # puts them in a list
-
-    # List of stocks to get from user
-    stocks = []
-
-    print("Enter 5 stocks to graph:")
-
-    for i in range(1, 6):
-        # Loop will test for a valid stock
-        while True:
-            print("Enter stock ticker " + str(i))
-            ticker = input(">>> ")
-            ticker = ticker.upper()
-            try:
-                print("Checking ticker...")
-                stock = yf.Ticker(ticker)
-                info = stock.info
-                # If info is assigned a dict of {'trailingPegRatio': None}
-                if info.get("trailingPegRatio") is None:
-                    print("Invalid stock. Please enter another stock ticker.")
-                    # Ask for a valid stock ticker
-                    continue
-                # Append valid ticker to stocks list
-                stocks.append(ticker)
-                print("Valid ticker.")
-                break
-            except:
-                print("Invalid stock. Please enter another stock ticker.")
-
-    return stocks
-
-
 # Begin program
+
+stockTickers = ["MSFT", "AAPL", "SONY", "META", "AMZN"]
 # Create charts directory to store png files of plot graphs
 try:
     Path("charts").mkdir()
 except FileExistsError:
     pass
 
-for stock in getStocks():
+for stock in stockTickers:
     getClosingPrice(stock)
     printGraph(stock)
 
