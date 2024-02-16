@@ -7,8 +7,8 @@
 
 ## Description
 
-This project will utilize yFinance to get the last 10 trading days of 5 stocks. It will put this information into a NumPy array and then use Matplotlib in order to create 5 
-graphs, that output as PNG files in the "charts" folder.
+This project will utilize yFinance to get the last 10 trading days of 5 stocks. It will put this information into a 
+NumPy array and then use Matplotlib in order to create 5 graphs, that output as PNG files in the "charts" folder.
 
 ## Getting Started
 
